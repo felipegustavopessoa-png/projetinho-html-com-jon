@@ -2,13 +2,59 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Gym</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1></h1>
-    <p></p>
-    <h2></h2>
-    <p></p>
-    
+
+<header>
+    <h1>🏋 Power Gym</h1>
+    <nav>
+        <a href="#">Início</a>
+        <a href="#">Planos</a>
+        <a href="#">Treinos</a>
+        <a href="#">Contato</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Transforme seu corpo hoje!</h2>
+    <p>Treinos personalizados, equipamentos modernos e acompanhamento profissional.</p>
+    <button onclick="matricular()">Matricule-se</button>
+</section>
+
+<section class="planos">
+    <div class="card">
+        <h3>Plano Básico</h3>
+        <p>R$ 69,90/mês</p>
+        <button onclick="plano('Básico')">Escolher</button>
+    </div>
+
+    <div class="card destaque">
+        <h3>Plano Premium</h3>
+        <p>R$ 109,90/mês</p>
+        <button onclick="plano('Premium')">Escolher</button>
+    </div>
+
+    <div class="card">
+        <h3>Plano VIP</h3>
+        <p>R$ 149,90/mês</p>
+        <button onclick="plano('VIP')">Escolher</button>
+    </div>
+</section>
+
+<section class="contador">
+    <h2>Alunos cadastrados</h2>
+    <h1 id="numero">0</h1>
+    <button onclick="contar()">Mostrar</button>
+</section>
+
+<footer>
+    <p>© 2026 Power Gym - Todos os direitos reservados.</p>
+</footer>
+
+<script src="script.js"></script>
+
 </body>
 </html>
