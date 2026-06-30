@@ -1,59 +1,881 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academia Iron Fitness</title>
-    <link rel="stylesheet" href="style.css">
+    <title>IRON FORGE ACADEMIA | Força, Disciplina e Resultados</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --primary: #ff3b00;
+            --dark: #0f0f0f;
+            --gray: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), 
+                        url('https://picsum.photos/id/1015/1920/1080') center/cover fixed;
+            color: #eee;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background particles */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.15;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.8rem;
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--primary);
+            letter-spacing: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5.5rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px rgba(255, 59, 0, 0.8);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 48px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 30px rgba(255, 59, 0, 0.6);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 0 50px rgba(255, 59, 0, 0.9);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 3px solid white;
+            margin-left: 20px;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #000;
+        }
+
+        section {
+            padding: 120px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.8rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+            position: relative;
+        }
+
+        h2:after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 5px;
+            background: var(--primary);
+            margin: 20px auto;
+        }
+
+        /* Sobre */
+        .about {
+            background: rgba(15, 15, 15, 0.95);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 59, 0, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--primary);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Aulas */
+        .classes {
+            background: linear-gradient(#0f0f0f, #1a1a1a);
+        }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .class-card {
+            background: #1f1f1f;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 2px solid transparent;
+        }
+
+        .class-card:hover {
+            transform: translateY(-20px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(255, 59, 0, 0.3);
+        }
+
+        .class-img {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .class-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        }
+
+        .class-info {
+            padding: 1.8rem;
+        }
+
+        .class-info h3 {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Treinadores */
+        .trainers {
+            background: rgba(15, 15, 15, 0.95);
+        }
+
+        .trainer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .trainer-card {
+            text-align: center;
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s;
+        }
+
+        .trainer-card:hover {
+            transform: scale(1.05);
+        }
+
+        .trainer-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background-size: cover;
+            border: 6px solid var(--primary);
+        }
+
+        /* Planos */
+        .plans {
+            background: linear-gradient(#0f0f0f, #1a1a1a);
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        .plan-card {
+            background: #111;
+            border: 3px solid #333;
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card.popular {
+            border-color: var(--primary);
+            transform: scale(1.08);
+            box-shadow: 0 0 60px rgba(255, 59, 0, 0.4);
+        }
+
+        .plan-card.popular::before {
+            content: "MAIS POPULAR";
+            position: absolute;
+            top: 20px;
+            right: -40px;
+            background: var(--primary);
+            padding: 8px 60px;
+            transform: rotate(45deg);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .plan-price {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        /* Galeria */
+        .gallery {
+            background: #0f0f0f;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            height: 320px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.15);
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            background: rgba(15, 15, 15, 0.98);
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Contato */
+        .contact {
+            background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+        }
+
+        form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        input, textarea {
+            padding: 18px;
+            background: #222;
+            border: 2px solid #444;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            padding: 80px 0 30px;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 4px solid var(--primary);
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s forwards;
+        }
+    </style>
 </head>
 <body>
 
+    <!-- Header -->
     <header>
-        <nav class="navbar">
-            <div class="logo">Iron<span>Fitness</span></div>
+        <nav>
+            <div class="logo">IRON FORGE</div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#aulas">Aulas</a></li>
+                <li><a href="#treinadores">Treinadores</a></li>
                 <li><a href="#planos">Planos</a></li>
+                <li><a href="#galeria">Galeria</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
+            <button class="btn btn-primary" onclick="showModal()">MATRICULE-SE AGORA</button>
         </nav>
     </header>
 
-    <section id="home" class="hero-section">
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div id="particles"></div>
         <div class="hero-content">
-            <h1>Supere Seus Limites</h1>
-            <p>Treinos personalizados, equipamentos de ponta e o suporte que você precisa para alcançar seus objetivos.</p>
-            <a href="#planos" class="btn-principal">Começar Agora</a>
-        </div>
-    </section>
-
-    <section id="planos" class="planos-section">
-        <h2>Nossos Planos</h2>
-        <div class="planos-container">
-            <div class="plano-card">
-                <h3>Plano Bronze</h3>
-                <p class="preco">R$ 89,90<span>/mês</span></p>
-                <ul>
-                    <li>Acesso à área de musculação</li>
-                    <li>Horário livre</li>
-                </ul>
-                <button class="btn-plano">Assinar</button>
+            <h1>TRANSFORME SEU CORPO.<br>FORJE SUA MENTE.</h1>
+            <p>A melhor academia de alta performance da cidade. Equipamentos de última geração, treinadores certificados e uma comunidade de guerreiros.</p>
+            <div>
+                <button class="btn btn-primary" onclick="showModal()">COMEÇAR AGORA</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('planos').scrollIntoView({behavior: 'smooth'})">VER PLANOS</button>
             </div>
-            <div class="plano-card destacado">
-                <h3>Plano Ouro</h3>
-                <p class="preco">R$ 129,90<span>/mês</span></p>
-                <ul>
-                    <li>Musculação + Aulas de Ginástica</li>
-                    <li>Acesso a todas as unidades</li>
-                    <li>Avaliação física inclusa</li>
-                </ul>
-                <button class="btn-plano">Assinar</button>
+            <div style="margin-top: 60px; font-size: 1.1rem; opacity: 0.8;">
+                <span>24h • Aberto todos os dias • +1200 alunos</span>
             </div>
         </div>
     </section>
 
-    <button id="btnTopo" title="Voltar ao topo">↑</button>
+    <!-- Sobre -->
+    <section id="sobre" class="about">
+        <div class="container">
+            <h2>SOBRE NÓS</h2>
+            <div class="about-grid">
+                <div>
+                    <h3 style="font-size: 2.4rem; margin-bottom: 1.5rem;">Mais que uma academia. Uma forja de titãs.</h3>
+                    <p style="font-size: 1.3rem; margin-bottom: 2rem;">
+                        Fundada em 2018, a Iron Forge nasceu da paixão por transformar vidas através da disciplina, da força e da consistência. 
+                        Aqui não treinamos apenas corpos — forjamos mentalidades de campeões.
+                    </p>
+                    <p style="font-size: 1.2rem; opacity: 0.9;">
+                        Com mais de 2500m² de área, equipamentos Technogym e Hammer Strength, salas climatizadas de crossfit, 
+                        muay thai, yoga e pilates, a Iron Forge é o destino definitivo para quem busca excelência.
+                    </p>
+                </div>
+                <div>
+                    <img src="https://picsum.photos/id/201/800/600" alt="Academia" style="width:100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+                </div>
+            </div>
 
-    <script src="script.js"></script>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="2500">0</div>
+                    <p>m² de treino</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="45">0</div>
+                    <p>treinadores</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="87">0</div>
+                    <p>aulas semanais</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="1240">0</div>
+                    <p>alunos ativos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aulas -->
+    <section id="aulas" class="classes">
+        <div class="container">
+            <h2>NOSSAS AULAS</h2>
+            <div class="class-grid">
+                <!-- Card 1 -->
+                <div class="class-card">
+                    <div class="class-img" style="background-image: url('https://picsum.photos/id/870/800/600')"></div>
+                    <div class="class-info">
+                        <h3>CROSSFIT</h3>
+                        <p style="margin-bottom: 1rem;">Treinos funcionais de alta intensidade. Desenvolva força, resistência e agilidade.</p>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.95rem; opacity: 0.8;">
+                            <span>⏱ 60 min</span>
+                            <span>🔥 Nível: Avançado</span>
+                        </div>
+                        <button class="btn btn-primary" style="margin-top: 1.5rem; width: 100%; padding: 14px;" onclick="alert('Inscrição para CrossFit realizada com sucesso!')">Matricular</button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="class-card">
+                    <div class="class-img" style="background-image: url('https://picsum.photos/id/1016/800/600')"></div>
+                    <div class="class-info">
+                        <h3>MUAY THAI</h3>
+                        <p style="margin-bottom: 1rem;">A arte marcial tailandesa. Aprenda defesa pessoal e queime gordura como nunca.</p>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.95rem; opacity: 0.8;">
+                            <span>⏱ 75 min</span>
+                            <span>🥊 Todos os níveis</span>
+                        </div>
+                        <button class="btn btn-primary" style="margin-top: 1.5rem; width: 100%; padding: 14px;" onclick="alert('Inscrição para Muay Thai realizada com sucesso!')">Matricular</button>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="class-card">
+                    <div class="class-img" style="background-image: url('https://picsum.photos/id/133/800/600')"></div>
+                    <div class="class-info">
+                        <h3>HYPERTROFIA</h3>
+                        <p style="margin-bottom: 1rem;">Foco total em ganho muscular. Programas personalizados com periodização.</p>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.95rem; opacity: 0.8;">
+                            <span>⏱ 90 min</span>
+                            <span>🏋️‍♂️ Intermediário</span>
+                        </div>
+                        <button class="btn btn-primary" style="margin-top: 1.5rem; width: 100%; padding: 14px;" onclick="alert('Inscrição para Hipertrofia realizada com sucesso!')">Matricular</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Treinadores -->
+    <section id="treinadores" class="trainers">
+        <div class="container">
+            <h2>NOSSOS TREINADORES</h2>
+            <div class="trainer-grid">
+                <div class="trainer-card">
+                    <div class="trainer-img" style="background-image: url('https://picsum.photos/id/64/800/800')"></div>
+                    <h3>Lucas Mendes</h3>
+                    <p>Head Coach • CrossFit L2 • 12 anos de experiência</p>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="alert('Perfil de Lucas aberto')">Ver Perfil</button>
+                </div>
+                <div class="trainer-card">
+                    <div class="trainer-img" style="background-image: url('https://picsum.photos/id/201/800/800')"></div>
+                    <h3>Ana Beatriz</h3>
+                    <p>Especialista em Muay Thai • Campeã estadual</p>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="alert('Perfil de Ana aberto')">Ver Perfil</button>
+                </div>
+                <div class="trainer-card">
+                    <div class="trainer-img" style="background-image: url('https://picsum.photos/id/1005/800/800')"></div>
+                    <h3>Rafael Costa</h3>
+                    <p>Personal Trainer • Nutricionista • Foco em transformação</p>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="alert('Perfil de Rafael aberto')">Ver Perfil</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos -->
+    <section id="planos" class="plans">
+        <div class="container">
+            <h2>PLANOS DE ASSINATURA</h2>
+            <div class="plan-grid">
+                <div class="plan-card">
+                    <h3>BÁSICO</h3>
+                    <div class="plan-price">R$ 89<span style="font-size:1rem;">/mês</span></div>
+                    <ul style="text-align:left; margin: 2rem 0; line-height: 2.2;">
+                        <li>✓ Acesso 24h</li>
+                        <li>✓ Musculação</li>
+                        <li>✓ 4 aulas/mês</li>
+                        <li>✓ Armário</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="subscribe('Básico')">Assinar</button>
+                </div>
+
+                <div class="plan-card popular">
+                    <h3>PREMIUM</h3>
+                    <div class="plan-price">R$ 159<span style="font-size:1rem;">/mês</span></div>
+                    <ul style="text-align:left; margin: 2rem 0; line-height: 2.2;">
+                        <li>✓ Acesso ilimitado</li>
+                        <li>✓ Todas as aulas</li>
+                        <li>✓ Treinador 1x/mês</li>
+                        <li>✓ Avaliação física</li>
+                        <li>✓ Shake grátis</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="subscribe('Premium')">Assinar Premium</button>
+                </div>
+
+                <div class="plan-card">
+                    <h3>ELITE</h3>
+                    <div class="plan-price">R$ 249<span style="font-size:1rem;">/mês</span></div>
+                    <ul style="text-align:left; margin: 2rem 0; line-height: 2.2;">
+                        <li>✓ Tudo do Premium</li>
+                        <li>✓ Personal 2x/semana</li>
+                        <li>✓ Plano nutricional</li>
+                        <li>✓ Acesso à sauna</li>
+                        <li>✓ Convidados</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="subscribe('Elite')">Assinar Elite</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section id="galeria" class="gallery">
+        <div class="container">
+            <h2>GALERIA</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://picsum.photos/id/870/600/600" alt=""></div>
+                <div class="gallery-item"><img src="https://picsum.photos/id/1015/600/600" alt=""></div>
+                <div class="gallery-item"><img src="https://picsum.photos/id/201/600/600" alt=""></div>
+                <div class="gallery-item"><img src="https://picsum.photos/id/133/600/600" alt=""></div>
+                <div class="gallery-item"><img src="https://picsum.photos/id/1005/600/600" alt=""></div>
+                <div class="gallery-item"><img src="https://picsum.photos/id/64/600/600" alt=""></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>O QUE DIZEM NOSSOS ALUNOS</h2>
+            <div class="testimonial-slider" id="testimonial">
+                <p style="font-size: 1.5rem; font-style: italic; margin-bottom: 2rem;">"A Iron Forge mudou completamente minha vida. Perdi 28kg e ganhei confiança que nunca tive."</p>
+                <p><strong>— Marcos Silva, 34 anos</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="contact">
+        <div class="container">
+            <h2>FAÇA PARTE DA FORJA</h2>
+            <form onsubmit="handleSubmit(event)">
+                <input type="text" placeholder="Seu nome completo" required>
+                <input type="email" placeholder="Seu melhor email" required>
+                <input type="tel" placeholder="Telefone / WhatsApp" required>
+                <select style="padding:18px; background:#222; border:2px solid #444; border-radius:12px; color:white;">
+                    <option>Quero conhecer a academia</option>
+                    <option>Quero experimentar uma aula grátis</option>
+                    <option>Quero falar com um treinador</option>
+                </select>
+                <textarea rows="5" placeholder="Deixe sua mensagem..."></textarea>
+                <button type="submit" class="btn btn-primary" style="width:100%; padding:20px;">ENVIAR MENSAGEM</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo" style="font-size:2.2rem; margin-bottom:1rem;">IRON FORGE</div>
+                    <p>Rua dos Campeões, 777<br>São Paulo, SP</p>
+                </div>
+                <div>
+                    <h4>Horário</h4>
+                    <p>Segunda a Domingo: 24 horas</p>
+                </div>
+                <div>
+                    <h4>Contato</h4>
+                    <p>(11) 99999-7777</p>
+                    <p>contato@ironforge.com.br</p>
+                </div>
+                <div>
+                    <h4>Siga-nos</h4>
+                    <p>Instagram • TikTok • YouTube</p>
+                </div>
+            </div>
+            <p>&copy; 2026 Iron Forge Academia. Todos os direitos reservados. Forjando campeões desde 2018.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Matrícula -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom:1.5rem;">Vamos começar sua transformação?</h2>
+            <input type="text" id="modal-name" placeholder="Nome completo" style="width:100%; margin-bottom:1rem;">
+            <input type="tel" id="modal-phone" placeholder="WhatsApp" style="width:100%; margin-bottom:1rem;">
+            <button class="btn btn-primary" style="width:100%; margin: 1rem 0;" onclick="confirmSubscription()">CONFIRMAR MATRÍCULA</button>
+            <button class="btn btn-secondary" style="width:100%;" onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        // Particles background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 80; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 6 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = '#ff3b00';
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.opacity = Math.random() * 0.6 + 0.2;
+                particle.style.animation = `float ${Math.random() * 25 + 15}s linear infinite`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Add keyframes dynamically
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes float {
+                0% { transform: translateY(0) rotate(0deg); }
+                100% { transform: translateY(-1200px) rotate(720deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                let count = 0;
+                const increment = target / 80;
+                
+                const updateCount = () => {
+                    count += increment;
+                    if (count < target) {
+                        counter.textContent = Math.floor(count);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Modal functions
+        function showModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function confirmSubscription() {
+            const name = document.getElementById('modal-name').value;
+            if (name.trim() !== '') {
+                alert(`Parabéns ${name}! Sua matrícula foi confirmada. Em breve entraremos em contato. 💪`);
+                closeModal();
+            } else {
+                alert('Por favor, preencha seu nome.');
+            }
+        }
+
+        function subscribe(plan) {
+            alert(`Plano ${plan} selecionado! Redirecionando para o checkout...`);
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Em até 24h entraremos em contato. 🔥');
+            e.target.reset();
+        }
+
+        // Smooth scroll for nav
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Keyboard support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                const modal = document.getElementById('modal');
+                if (modal.style.display === 'flex') closeModal();
+            }
+        });
+
+        // Initialize everything
+        window.onload = function() {
+            createParticles();
+            setTimeout(animateCounters, 800);
+            
+            // Random testimonial rotation
+            const testimonials = [
+                `"A Iron Forge mudou completamente minha vida. Perdi 28kg e ganhei confiança que nunca tive." — Marcos Silva`,
+                `"Melhor investimento que fiz na minha saúde. Os treinadores são incríveis!" — Juliana Mendes`,
+                `"Ambiente motivador, equipamentos top e resultados reais. Recomendo!" — Pedro Almeida`
+            ];
+            
+            let index = 0;
+            const slider = document.getElementById('testimonial');
+            
+            setInterval(() => {
+                index = (index + 1) % testimonials.length;
+                slider.style.opacity = 0;
+                setTimeout(() => {
+                    slider.innerHTML = `<p style="font-size: 1.5rem; font-style: italic; margin-bottom: 2rem;">${testimonials[index].split('—')[0]}</p><p><strong>— ${testimonials[index].split('—')[1]}</strong></p>`;
+                    slider.style.opacity = 1;
+                }, 600);
+            }, 7000);
+            
+            console.log('%cIRON FORGE ACADEMIA - Site carregado com sucesso!', 'color: #ff3b00; font-size: 16px; font-weight: bold;');
+        };
+    </script>
 </body>
 </html>
